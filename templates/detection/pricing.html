@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pricing - LeafSense{% endblock %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:flex-col sm:align-center">
+            <h1 class="text-5xl font-extrabold text-gray-900 dark:text-white sm:text-center">Pricing Plans</h1>
+            <p class="mt-5 text-xl text-gray-500 dark:text-gray-400 sm:text-center">Start with our free tier and upgrade as you grow. All plans include our core features.</p>
+        </div>
+        <div class="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
+            <!-- Free Tier -->
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm divide-y divide-gray-200 dark:divide-gray-700">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Free</h2>
+                    <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Perfect for trying out LeafSense</p>
+                    <p class="mt-8">
+                        <span class="text-4xl font-extrabold text-gray-900 dark:text-white">$0</span>
+                        <span class="text-base font-medium text-gray-500 dark:text-gray-400">/month</span>
+                    </p>
+                    <a href="{% url 'register' %}" class="mt-8 block w-full bg-emerald-600 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-emerald-700">Get started</a>
+                </div>
+                <div class="pt-6 pb-8 px-6">
+                    <h3 class="text-xs font-medium text-gray-900 dark:text-white tracking-wide uppercase">What's included</h3>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">5 detections per month</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Basic disease detection</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Email support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pro Tier -->
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm divide-y divide-gray-200 dark:divide-gray-700">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Pro</h2>
+                    <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">For serious gardeners and small farms</p>
+                    <p class="mt-8">
+                        <span class="text-4xl font-extrabold text-gray-900 dark:text-white">$29</span>
+                        <span class="text-base font-medium text-gray-500 dark:text-gray-400">/month</span>
+                    </p>
+                    <a href="{% url 'register' %}" class="mt-8 block w-full bg-emerald-600 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-emerald-700">Get started</a>
+                </div>
+                <div class="pt-6 pb-8 px-6">
+                    <h3 class="text-xs font-medium text-gray-900 dark:text-white tracking-wide uppercase">What's included</h3>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Unlimited detections</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Advanced disease detection</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Priority support</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Treatment recommendations</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Enterprise Tier -->
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm divide-y divide-gray-200 dark:divide-gray-700">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Enterprise</h2>
+                    <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">For large farms and agricultural businesses</p>
+                    <p class="mt-8">
+                        <span class="text-4xl font-extrabold text-gray-900 dark:text-white">Custom</span>
+                    </p>
+                    <a href="#contact" class="mt-8 block w-full bg-emerald-600 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-emerald-700">Contact sales</a>
+                </div>
+                <div class="pt-6 pb-8 px-6">
+                    <h3 class="text-xs font-medium text-gray-900 dark:text-white tracking-wide uppercase">What's included</h3>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Everything in Pro</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Custom AI model training</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">24/7 dedicated support</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <svg class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">API access</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

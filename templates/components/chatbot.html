@@ -1,0 +1,168 @@
+{% load static %}
+
+<!-- Chat Button -->
+<button id="chatButton" class="fixed bottom-4 right-4 bg-green-600 text-white rounded-full p-4 shadow-lg hover:bg-green-700 transition-colors duration-200 z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+    </svg>
+</button>
+
+<!-- Chat Window -->
+<div id="chatWindow" class="fixed bottom-20 right-4 w-96 bg-white rounded-lg shadow-xl hidden z-50">
+    <!-- Chat Header -->
+    <div class="bg-green-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+        <h3 class="font-semibold">Plant Disease Assistant</h3>
+        <button id="closeChat" class="text-white hover:text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Chat Messages -->
+    <div id="chatMessages" class="h-96 overflow-y-auto p-4 space-y-4">
+        <!-- Welcome Message -->
+        <div class="flex items-start space-x-2">
+            <div class="bg-green-100 rounded-lg p-4 max-w-[80%]">
+                <p class="text-base text-gray-800">Hello! I'm your plant disease assistant. How can I help you today?</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chat Input -->
+    <div class="border-t p-4">
+        <form id="chatForm" class="flex space-x-2">
+            <input type="text" id="chatInput" class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Type your message...">
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200">
+                Send
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const chatButton = document.getElementById('chatButton');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    
+    // Toggle chat window
+    chatButton.addEventListener('click', () => {
+        chatWindow.classList.remove('hidden');
+    });
+    
+    closeChat.addEventListener('click', () => {
+        chatWindow.classList.add('hidden');
+    });
+    
+    // Handle form submission
+    chatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const message = chatInput.value.trim();
+        if (!message) return;
+        
+        // Add user message to chat
+        addMessage(message, 'user');
+        chatInput.value = '';
+        
+        try {
+            // Show loading state
+            const loadingDiv = addMessage('Thinking...', 'assistant', true);
+            
+            // Get CSRF token
+            const csrfToken = getCookie('csrftoken');
+            if (!csrfToken) {
+                throw new Error('CSRF token not found. Please refresh the page and try again.');
+            }
+            
+            // Send message to API
+            const response = await fetch('/detection/chat/api/test/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ message })
+            });
+            
+            // Check if response is JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                // If not JSON, try to get the text content to see what's happening
+                const textContent = await response.text();
+                console.error('Non-JSON response:', textContent);
+                
+                // Check if it's a 500 error page
+                if (textContent.includes('500') || textContent.includes('Server Error')) {
+                    throw new Error('Server error occurred. Please try again later.');
+                }
+                
+                // Check if it's a 403 error (CSRF token issue)
+                if (textContent.includes('403') || textContent.includes('Forbidden')) {
+                    throw new Error('CSRF token validation failed. Please refresh the page and try again.');
+                }
+                
+                throw new Error('Server returned non-JSON response. Please try again later.');
+            }
+            
+            const data = await response.json();
+            
+            // Remove loading message
+            loadingDiv.remove();
+            
+            if (data.status === 'success') {
+                addMessage(data.response, 'assistant');
+            } else {
+                addMessage('Sorry, I encountered an error: ' + (data.error || 'Unknown error') + '. Please try again.', 'assistant');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage('Sorry, I encountered an error. Please check your internet connection and try again. Error details: ' + error.message, 'assistant');
+        }
+    });
+    
+    // Helper function to add messages to chat
+    function addMessage(text, sender, isLoading = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'flex items-start space-x-2';
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = sender === 'user' 
+            ? 'bg-blue-100 rounded-lg p-4 max-w-[80%] ml-auto'
+            : 'bg-green-100 rounded-lg p-4 max-w-[80%]';
+        
+        const messageText = document.createElement('p');
+        messageText.className = 'text-base text-gray-800 whitespace-pre-line';
+        messageText.textContent = text;
+        
+        contentDiv.appendChild(messageText);
+        messageDiv.appendChild(contentDiv);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        return messageDiv;
+    }
+    
+    // Helper function to get CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script> 

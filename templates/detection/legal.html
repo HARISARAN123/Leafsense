@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Legal - LeafSense{% endblock %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-800 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">Legal Information</h1>
+            <p class="mt-4 text-lg text-gray-500 dark:text-gray-400">Important information about using LeafSense</p>
+        </div>
+
+        <div class="mt-16 grid gap-8 md:grid-cols-3">
+            <!-- Privacy Policy -->
+            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 mx-auto">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h2 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white text-center">Privacy Policy</h2>
+                <p class="mt-4 text-gray-500 dark:text-gray-400 text-center">Learn how we collect, use, and protect your data.</p>
+                <button onclick="openModal('privacy-modal')" class="mt-6 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 transition-colors duration-300">
+                    View Policy
+                </button>
+            </div>
+
+            <!-- Terms of Service -->
+            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 mx-auto">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h2 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white text-center">Terms of Service</h2>
+                <p class="mt-4 text-gray-500 dark:text-gray-400 text-center">Understand the terms and conditions of using our service.</p>
+                <button onclick="openModal('terms-modal')" class="mt-6 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 transition-colors duration-300">
+                    View Terms
+                </button>
+            </div>
+
+            <!-- Cookie Policy -->
+            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 mx-auto">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white text-center">Cookie Policy</h2>
+                <p class="mt-4 text-gray-500 dark:text-gray-400 text-center">Information about how we use cookies and similar technologies.</p>
+                <button onclick="openModal('cookie-modal')" class="mt-6 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 transition-colors duration-300">
+                    View Policy
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div id="privacy-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white dark:bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Privacy Policy</h2>
+                    <button onclick="closeModal('privacy-modal')" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-6 prose dark:prose-invert max-w-none">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Last updated: March 15, 2024</p>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-6">1. Information We Collect</h3>
+                    <p class="text-gray-700 dark:text-gray-300">We collect information that you provide directly to us, including:</p>
+                    <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>Account information (name, email, password)</li>
+                        <li>Plant images and detection results</li>
+                        <li>Usage data and analytics</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">2. How We Use Your Information</h3>
+                    <p class="text-gray-700 dark:text-gray-300">We use the collected information to:</p>
+                    <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>Provide and improve our services</li>
+                        <li>Process your plant disease detection requests</li>
+                        <li>Send you important updates and notifications</li>
+                        <li>Analyze usage patterns to enhance user experience</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">3. Data Security</h3>
+                    <p class="text-gray-700 dark:text-gray-300">We implement appropriate security measures to protect your personal information, including:</p>
+                    <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>Encryption of data in transit and at rest</li>
+                        <li>Regular security assessments and updates</li>
+                        <li>Limited access to personal information by employees</li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">4. Your Rights</h3>
+                    <p class="text-gray-700 dark:text-gray-300">You have the right to:</p>
+                    <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>Access your personal data</li>
+                        <li>Correct inaccurate data</li>
+                        <li>Request deletion of your data</li>
+                        <li>Object to data processing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div id="terms-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white dark:bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Terms of Service</h2>
+                    <button onclick="closeModal('terms-modal')" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-6 prose dark:prose-invert max-w-none">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Last updated: March 15, 2024</p>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-6">1. Acceptance of Terms</h3>
+                    <p class="text-gray-700 dark:text-gray-300">By accessing and using LeafSense, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.</p>
+
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">2. User Responsibilities</h3>
+                    <p class="text-gray-700 dark:text-gray-300">You agree to:</p>
+                    <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>Provide accurate information when creating an account</li>
+                        <li>Maintain the security of your account credentials</li>
+                        <li>Use the service responsibly and in compliance with all applicable laws</li>
+                        <li>Not attempt to circumvent any security features of the service</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">3. Service Limitations</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Our plant disease detection service is provided "as is" and may not be 100% accurate. We do not guarantee:</p>
+                    <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>The accuracy of disease detection results</li>
+                        <li>The effectiveness of recommended treatments</li>
+                        <li>Continuous, uninterrupted access to the service</li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">4. Intellectual Property</h3>
+                    <p class="text-gray-700 dark:text-gray-300">All content, features, and functionality of LeafSense are owned by us and are protected by international copyright, trademark, and other intellectual property laws.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookie-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white dark:bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Cookie Policy</h2>
+                    <button onclick="closeModal('cookie-modal')" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-6 prose dark:prose-invert max-w-none">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Last updated: March 15, 2024</p>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-6">1. What Are Cookies</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Cookies are small text files stored on your device when you visit our website. They help us provide you with a better experience by:</p>
+                    <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>Remembering your preferences</li>
+                        <li>Keeping you signed in</li>
+                        <li>Understanding how you use our website</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">2. How We Use Cookies</h3>
+                    <p class="text-gray-700 dark:text-gray-300">We use cookies to:</p>
+                    <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>Remember your preferences and settings</li>
+                        <li>Analyze website traffic and usage patterns</li>
+                        <li>Improve user experience and site functionality</li>
+                        <li>Provide personalized content and recommendations</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">3. Types of Cookies We Use</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-gray-50 dark:bg-gray-800">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Purpose</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Essential</td>
+                                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">Required for basic site functionality</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">Session</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Analytics</td>
+                                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">Track usage patterns and improve our service</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">1-2 years</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Preference</td>
+                                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">Remember your settings and preferences</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">1 year</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-8">4. Managing Cookies</h3>
+                    <p class="text-gray-700 dark:text-gray-300">You can control cookies through your browser settings. However, disabling certain cookies may limit your ability to use some features of our website.</p>
+                    <p class="text-gray-700 dark:text-gray-300 mt-4">To learn more about cookies and how to manage them, visit <a href="https://www.allaboutcookies.org/" class="text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300">www.allaboutcookies.org</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal(modalId) {
+    document.getElementById(modalId).classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target.classList.contains('fixed')) {
+        event.target.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modals = ['privacy-modal', 'terms-modal', 'cookie-modal'];
+        modals.forEach(modalId => {
+            const modal = document.getElementById(modalId);
+            if (!modal.classList.contains('hidden')) {
+                closeModal(modalId);
+            }
+        });
+    }
+});
+</script>
+{% endblock %} 

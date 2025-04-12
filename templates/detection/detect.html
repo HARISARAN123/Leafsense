@@ -1,0 +1,434 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detect Disease - LeafSense{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-white dark:bg-gray-900 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+                <span class="block">Plant Disease Detection</span>
+                <span class="block text-primary-600">Upload Your Plant Image</span>
+            </h1>
+            <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-400 sm:mt-4">
+                Take a clear photo of your plant's leaves and let our AI analyze it for potential diseases.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-8 bg-primary-600 dark:bg-primary-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="bg-white dark:bg-gray-700 overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-primary-500 rounded-md p-3">
+                            <i class="fas fa-leaf text-white text-2xl"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                                    Plants Analyzed
+                                </dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                        10,000+
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-700 overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-primary-500 rounded-md p-3">
+                            <i class="fas fa-bug text-white text-2xl"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                                    Diseases Detected
+                                </dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                        50+
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-700 overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-primary-500 rounded-md p-3">
+                            <i class="fas fa-percentage text-white text-2xl"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                                    Accuracy Rate
+                                </dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                        95%
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-700 overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-primary-500 rounded-md p-3">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                                    Happy Users
+                                </dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                        5,000+
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Upload Section -->
+<section class="py-12 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white dark:bg-gray-700 shadow-xl rounded-lg overflow-hidden">
+                <div class="px-4 py-5 sm:p-6">
+                    <form method="post" enctype="multipart/form-data" class="space-y-6" id="detection-form">
+                        {% csrf_token %}
+                        
+                        <!-- Upload Area -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Upload Image
+                            </label>
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg hover:border-primary-500 dark:hover:border-primary-400 transition-colors duration-200" id="drop-zone">
+                                <div class="space-y-2 text-center">
+                                    <div class="flex justify-center">
+                                        <i class="fas fa-cloud-upload-alt text-4xl text-primary-500"></i>
+                                    </div>
+                                    <div class="flex text-sm text-gray-600 dark:text-gray-400">
+                                        <label for="file-upload" class="relative cursor-pointer bg-white dark:bg-gray-700 rounded-md font-medium text-primary-600 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500">
+                                            <span>Upload a file</span>
+                                            <input id="file-upload" name="image" type="file" class="sr-only" accept="image/*" required>
+                                        </label>
+                                        <p class="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                                        PNG, JPG, JPEG up to 10MB
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Image Preview -->
+                        <div id="image-preview" class="hidden">
+                            <div class="relative">
+                                <img id="preview" class="max-w-full h-auto rounded-lg shadow-lg" alt="Preview">
+                                <button type="button" id="remove-image" class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex justify-center">
+                            <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                                <i class="fas fa-search mr-2"></i>
+                                Analyze Image
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Diseases Section -->
+<section class="py-12 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+            <h2 class="text-base text-primary-600 font-semibold tracking-wide uppercase">Common Plant Diseases</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                What We Can Detect
+            </p>
+        </div>
+        
+        <div class="mt-10">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1593691509543-c55fb32e1ce4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Powdery Mildew">
+                    <div class="p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">Powdery Mildew</h3>
+                        <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
+                            A fungal disease that appears as white or gray powdery spots on leaves, stems, and flowers.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1593691509543-c55fb32e1ce4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Leaf Blight">
+                    <div class="p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">Leaf Blight</h3>
+                        <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
+                            Characterized by brown or black spots on leaves that can lead to defoliation if untreated.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1593691509543-c55fb32e1ce4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Root Rot">
+                    <div class="p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">Root Rot</h3>
+                        <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
+                            A condition where roots become mushy and brown due to overwatering or poor drainage.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Instructions Section -->
+<section class="py-12 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+            <h2 class="text-base text-primary-600 font-semibold tracking-wide uppercase">How It Works</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                Get the Best Results
+            </p>
+        </div>
+        
+        <div class="mt-10">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white mb-4">
+                        <i class="fas fa-camera text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Take Clear Photos</h3>
+                    <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
+                        Ensure good lighting and focus on the affected areas of the plant.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white mb-4">
+                        <i class="fas fa-leaf text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Include Multiple Views</h3>
+                    <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
+                        Take photos from different angles to help with accurate diagnosis.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white mb-4">
+                        <i class="fas fa-clipboard-check text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Review Results</h3>
+                    <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
+                        Get detailed analysis and treatment recommendations for your plant.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-12 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+            <h2 class="text-base text-primary-600 font-semibold tracking-wide uppercase">Testimonials</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                What Our Users Say
+            </p>
+        </div>
+        
+        <div class="mt-10">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
+                                <span class="text-primary-600 dark:text-primary-300 font-bold">JD</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">John Doe</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Home Gardener</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "LeafSense helped me identify a fungal infection in my tomato plants. The treatment recommendations were spot-on and saved my entire crop!"
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
+                                <span class="text-primary-600 dark:text-primary-300 font-bold">SM</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">Sarah Miller</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Urban Farmer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "As someone who grows vegetables in my backyard, this tool has been invaluable. It's like having a plant doctor in your pocket!"
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
+                                <span class="text-primary-600 dark:text-primary-300 font-bold">RJ</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">Robert Johnson</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Professional Farmer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "I use LeafSense on my farm to quickly diagnose issues across multiple crops. It's saved me countless hours and helped prevent disease outbreaks."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-primary-600 dark:bg-primary-800">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+        <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            <span class="block">Ready to protect your plants?</span>
+            <span class="block text-primary-200">Start using LeafSense today.</span>
+        </h2>
+        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+            <div class="inline-flex rounded-md shadow">
+                <a href="{% url 'register' %}" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-200">
+                    <i class="fas fa-user-plus mr-2"></i> Sign Up Now
+                </a>
+            </div>
+            <div class="ml-3 inline-flex rounded-md shadow">
+                <a href="#detection-form" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 transition-colors duration-200">
+                    <i class="fas fa-camera mr-2"></i> Try It Free
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-upload');
+    const preview = document.getElementById('preview');
+    const imagePreview = document.getElementById('image-preview');
+    const removeButton = document.getElementById('remove-image');
+    const form = document.getElementById('detection-form');
+
+    // Handle drag and drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight(e) {
+        dropZone.classList.add('border-primary-500');
+    }
+
+    function unhighlight(e) {
+        dropZone.classList.remove('border-primary-500');
+    }
+
+    dropZone.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+    }
+
+    // Handle file input change
+    fileInput.addEventListener('change', function() {
+        handleFiles(this.files);
+    });
+
+    function handleFiles(files) {
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                    dropZone.classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+
+    // Handle remove image
+    removeButton.addEventListener('click', function() {
+        fileInput.value = '';
+        preview.src = '';
+        imagePreview.classList.add('hidden');
+        dropZone.classList.remove('hidden');
+    });
+
+    // Form submission
+    form.addEventListener('submit', function(e) {
+        if (!fileInput.files.length) {
+            e.preventDefault();
+            alert('Please select an image to analyze');
+        }
+    });
+});
+</script>
+{% endblock %} 

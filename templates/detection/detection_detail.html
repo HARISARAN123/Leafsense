@@ -1,0 +1,414 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-900 py-8 sm:py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="mb-8">
+            <ol class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                <li><a href="{% url 'dashboard' %}" class="hover:text-green-600 dark:hover:text-green-400">Dashboard</a></li>
+                <li>
+                    <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                    </svg>
+                </li>
+                <li class="text-gray-900 dark:text-white font-medium">Detection Results</li>
+            </ol>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Detection Summary and Image -->
+            <div class="lg:col-span-1">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Detection Summary</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Disease</h3>
+                                <p class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{{ detection.disease }}</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Crop</h3>
+                                <p class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{{ detection.crop|default:"Unknown" }}</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Confidence</h3>
+                                <div class="mt-1 flex items-center">
+                                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                        <div class="bg-green-600 h-2.5 rounded-full confidence-bar" data-confidence="{% if detection.confidence %}{{ detection.confidence }}{% else %}75{% endif %}"></div>
+                                    </div>
+                                    <span class="ml-2 text-sm font-medium text-gray-900 dark:text-white confidence-text">{% if detection.confidence %}{{ detection.confidence }}{% else %}75{% endif %}%</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Severity</h3>
+                                <p class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{{ detection.severity|default:"Moderate" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 dark:border-gray-700">
+                        <div class="p-6">
+                            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Uploaded Image</h3>
+                            <div class="relative rounded-lg overflow-hidden">
+                                <img src="{{ detection.image.url }}" alt="Plant leaf" class="w-full h-auto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Analysis and Recommendations -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Environmental Recommendations -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Environmental Recommendations</h2>
+                        
+                        <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 mb-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-green-700 dark:text-green-300">
+                                        For optimal plant health, maintain these environmental conditions:
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <svg class="h-5 w-5 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z" />
+                                    </svg>
+                                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">Humidity</h3>
+                                </div>
+                                <p class="text-sm text-gray-700 dark:text-gray-300">Maintain humidity between 70-80% for optimal growth</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <svg class="h-5 w-5 text-orange-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" />
+                                    </svg>
+                                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">Temperature</h3>
+                                </div>
+                                <p class="text-sm text-gray-700 dark:text-gray-300">Keep temperature between 25-30°C for ideal conditions</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <svg class="h-5 w-5 text-yellow-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                                    </svg>
+                                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">Soil pH</h3>
+                                </div>
+                                <p class="text-sm text-gray-700 dark:text-gray-300">Monitor soil pH regularly and adjust as needed</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <svg class="h-5 w-5 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.343c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707a1 1 0 00-1.414-1.414L12 3.586V2a1 1 0 10-2 0v1.586l-.293.293a1 1 0 00-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">Watering</h3>
+                                </div>
+                                <p class="text-sm text-gray-700 dark:text-gray-300">Water consistently and avoid overwatering</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-700 dark:text-blue-300">
+                                        For this specific plant, we recommend keeping it in a controlled environment with consistent monitoring of these parameters.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Treatment Timeline -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Treatment Timeline</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Time to Treat</h3>
+                                <p class="mt-1 text-lg font-semibold text-red-600 dark:text-red-400">
+                                    {% with time_section=detection.tips|split:"Time to Treat:" %}
+                                        {% if time_section|length > 1 %}
+                                            {% with time=time_section|index:1|split:"Estimated Recovery:"|first|strip %}
+                                                {{ time }}
+                                            {% endwith %}
+                                        {% else %}
+                                            Not specified
+                                        {% endif %}
+                                    {% endwith %}
+                                </p>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Estimated Recovery</h3>
+                                <p class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+                                    {% with recovery_section=detection.tips|split:"Estimated Recovery:" %}
+                                        {% if recovery_section|length > 1 %}
+                                            {% with recovery=recovery_section|index:1|split:"Yield Impact:"|first|strip %}
+                                                {{ recovery }}
+                                            {% endwith %}
+                                        {% else %}
+                                            Not specified
+                                        {% endif %}
+                                    {% endwith %}
+                                </p>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Yield Impact</h3>
+                                <p class="mt-1 text-lg font-semibold text-orange-600 dark:text-orange-400">
+                                    {% with impact_section=detection.tips|split:"Yield Impact:" %}
+                                        {% if impact_section|length > 1 %}
+                                            {% with impact=impact_section|index:1|split:"CHEMICAL SOLUTIONS:"|first|strip %}
+                                                {{ impact }}
+                                            {% endwith %}
+                                        {% else %}
+                                            Not specified
+                                        {% endif %}
+                                    {% endwith %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Solutions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Chemical Solutions -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Chemical Solutions</h2>
+                            
+                            <ul class="space-y-3">
+                                {% with chemical_section=detection.tips|split:"CHEMICAL SOLUTIONS:" %}
+                                    {% if chemical_section|length > 1 %}
+                                        {% with solutions=chemical_section|index:1|split:"ORGANIC SOLUTIONS:"|first|strip|split:"\n" %}
+                                            {% for solution in solutions %}
+                                                {% if solution %}
+                                                    <li class="flex items-start">
+                                                        <svg class="h-5 w-5 text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        <span class="ml-3 text-gray-700 dark:text-gray-300 break-words">{{ solution }}</span>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endwith %}
+                                    {% else %}
+                                        <li class="text-gray-500 dark:text-gray-400">No chemical solutions specified</li>
+                                    {% endif %}
+                                {% endwith %}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Organic Solutions -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Organic Solutions</h2>
+                            
+                            <ul class="space-y-3">
+                                {% with organic_section=detection.tips|split:"ORGANIC SOLUTIONS:" %}
+                                    {% if organic_section|length > 1 %}
+                                        {% with solutions=organic_section|index:1|split:"PREVENTIVE MEASURES:"|first|strip|split:"\n" %}
+                                            {% for solution in solutions %}
+                                                {% if solution %}
+                                                    <li class="flex items-start">
+                                                        <svg class="h-5 w-5 text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        <span class="ml-3 text-gray-700 dark:text-gray-300 break-words">{{ solution }}</span>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endwith %}
+                                    {% else %}
+                                        <li class="text-gray-500 dark:text-gray-400">No organic solutions specified</li>
+                                    {% endif %}
+                                {% endwith %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Preventive Measures -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Preventive Measures</h2>
+                        
+                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 mb-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-yellow-700 dark:text-yellow-300">
+                                        Follow these preventive measures to protect your plants from disease:
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {% with preventive_section=detection.tips|split:"PREVENTIVE MEASURES:" %}
+                                {% if preventive_section|length > 1 %}
+                                    {% with measures=preventive_section|index:1|split:"REAL-TIME MONITORING:"|first|strip|split:"\n" %}
+                                        {% for measure in measures %}
+                                            {% if measure %}
+                                                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                                    <div class="flex items-start">
+                                                        <svg class="h-5 w-5 text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        <span class="ml-3 text-gray-700 dark:text-gray-300 break-words">{{ measure }}</span>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endwith %}
+                                {% else %}
+                                    <div class="col-span-2 text-gray-500 dark:text-gray-400">No preventive measures specified</div>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Real-Time Monitoring Panel -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-white">Real-Time Monitoring</h2>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Live</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Spread Risk</h3>
+                                <p class="mt-1 text-lg font-semibold text-orange-600 dark:text-orange-400">
+                                    {% with spread_section=detection.tips|split:"Spread Risk:" %}
+                                        {% if spread_section|length > 1 %}
+                                            {% with risk=spread_section|index:1|split:"Trend:"|first|strip %}
+                                                {{ risk }}
+                                            {% endwith %}
+                                        {% else %}
+                                            Not specified
+                                        {% endif %}
+                                    {% endwith %}
+                                </p>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Trend</h3>
+                                <p class="mt-1 text-lg font-semibold text-red-600 dark:text-red-400">
+                                    {% with trend_section=detection.tips|split:"Trend:" %}
+                                        {% if trend_section|length > 1 %}
+                                            {% with trend=trend_section|index:1|split:"Progression:"|first|strip %}
+                                                {{ trend }}
+                                            {% endwith %}
+                                        {% else %}
+                                            Not specified
+                                        {% endif %}
+                                    {% endwith %}
+                                </p>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Progression</h3>
+                                <p class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+                                    {% with progression_section=detection.tips|split:"Progression:" %}
+                                        {% if progression_section|length > 1 %}
+                                            {% with progression=progression_section|index:1|split:"Next Check:"|first|strip %}
+                                                {{ progression }}
+                                            {% endwith %}
+                                        {% else %}
+                                            Not specified
+                                        {% endif %}
+                                    {% endwith %}
+                                </p>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Next Check</h3>
+                                <p class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+                                    {% with check_section=detection.tips|split:"Next Check:" %}
+                                        {% if check_section|length > 1 %}
+                                            {% with check=check_section|index:1|split:"\n\n"|first|strip %}
+                                                {{ check }}
+                                            {% endwith %}
+                                        {% else %}
+                                            Not specified
+                                        {% endif %}
+                                    {% endwith %}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                            Last Updated: {{ detection.created_at|date:"F j, Y, g:i a" }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <a href="{% url 'dashboard' %}" class="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                <svg class="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                Back to Dashboard
+            </a>
+            <a href="{% url 'detection_history' %}" class="inline-flex justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md shadow-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                <svg class="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                </svg>
+                View History
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set confidence bar width
+        const confidenceBar = document.querySelector('.confidence-bar');
+        const confidenceText = document.querySelector('.confidence-text');
+        if (confidenceBar && confidenceText) {
+            const confidence = confidenceBar.getAttribute('data-confidence');
+            confidenceBar.style.width = confidence + '%';
+        }
+    });
+</script>
+{% endblock %} 

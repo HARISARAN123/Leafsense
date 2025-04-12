@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Careers - LeafSense{% endblock %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-800 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">Join Our Team</h1>
+            <p class="mt-4 text-lg text-gray-500 dark:text-gray-400">Help us revolutionize agriculture with AI technology</p>
+        </div>
+
+        <div class="mt-16 grid gap-8 md:grid-cols-2">
+            <!-- Job Position 1 -->
+            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">AI Research Engineer</h2>
+                <p class="mt-2 text-gray-500 dark:text-gray-400">Full-time • Remote</p>
+                <p class="mt-4 text-gray-600 dark:text-gray-300">We're looking for an AI Research Engineer to help develop and improve our plant disease detection algorithms.</p>
+                <ul class="mt-4 space-y-2 text-gray-600 dark:text-gray-300">
+                    <li>• 3+ years of experience in machine learning</li>
+                    <li>• Strong Python skills</li>
+                    <li>• Experience with computer vision</li>
+                </ul>
+                <div class="mt-6">
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- Job Position 2 -->
+            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Agricultural Expert</h2>
+                <p class="mt-2 text-gray-500 dark:text-gray-400">Full-time • Hybrid</p>
+                <p class="mt-4 text-gray-600 dark:text-gray-300">Join our team as an Agricultural Expert to help validate and improve our disease detection system.</p>
+                <ul class="mt-4 space-y-2 text-gray-600 dark:text-gray-300">
+                    <li>• 5+ years of experience in agriculture</li>
+                    <li>• Knowledge of plant diseases</li>
+                    <li>• Strong communication skills</li>
+                </ul>
+                <div class="mt-6">
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

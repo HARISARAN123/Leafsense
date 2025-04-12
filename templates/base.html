@@ -1,0 +1,280 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LeafSense - AI-Powered Plant Disease Detection{% endblock %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="LeafSense - Advanced AI-powered plant disease detection system. Identify plant diseases, get treatment recommendations, and protect your crops with our cutting-edge technology.">
+    <meta name="keywords" content="LeafSense, plant disease detection, AI plant analysis, leaf disease, crop protection, plant health, agricultural technology, smart farming, plant diagnosis, disease prevention, plant care, agricultural AI, crop management, plant monitoring, disease identification, plant pathology, agricultural innovation, sustainable farming, precision agriculture">
+    <meta name="author" content="LeafSense">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="LeafSense - AI-Powered Plant Disease Detection">
+    <meta property="og:description" content="Advanced AI-powered plant disease detection system. Identify plant diseases, get treatment recommendations, and protect your crops.">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeafSense - AI-Powered Plant Disease Detection">
+    <meta name="twitter:description" content="Advanced AI-powered plant disease detection system. Identify plant diseases, get treatment recommendations, and protect your crops.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "LeafSense",
+        "applicationCategory": "AgriculturalApplication",
+        "operatingSystem": "Web",
+        "description": "AI-powered plant disease detection system that helps farmers and gardeners identify plant diseases and get treatment recommendations.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "125"
+        }
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="{% url 'home' %}" class="flex items-center">
+                            <i class="fas fa-leaf text-primary-600 text-2xl mr-2"></i>
+                            <span class="font-bold text-xl text-gray-900 dark:text-white">LeafSense</span>
+                        </a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="{% url 'home' %}" class="{% if request.path == '/' %}border-primary-500 text-gray-900 dark:text-white{% else %}border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            Home
+                        </a>
+                        <a href="{% url 'about' %}" class="{% if 'about' in request.path %}border-primary-500 text-gray-900 dark:text-white{% else %}border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            About
+                        </a>
+                        <a href="{% url 'features' %}" class="{% if 'features' in request.path %}border-primary-500 text-gray-900 dark:text-white{% else %}border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            Features
+                        </a>
+                        <a href="{% url 'detect' %}" class="{% if 'detect' in request.path %}border-primary-500 text-gray-900 dark:text-white{% else %}border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            Detect Disease
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button id="theme-toggle" class="p-2 rounded-full text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    {% if user.is_authenticated %}
+                        <div class="ml-3 relative">
+                            <div class="flex items-center">
+                                <a href="{% url 'dashboard' %}" class="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    <i class="fas fa-user-circle mr-1"></i> {{ user.username }}
+                                </a>
+                                <a href="{% url 'logout' %}" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-200">
+                                    Logout
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            <i class="fas fa-sign-in-alt mr-1"></i> Login
+                        </a>
+                        <a href="{% url 'register' %}" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-200">
+                            <i class="fas fa-user-plus mr-1"></i> Sign Up
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="{% url 'home' %}" class="{% if request.path == '/' %}bg-primary-50 dark:bg-primary-900 border-primary-500 text-primary-700 dark:text-primary-200{% else %}border-transparent text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200{% endif %} block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors duration-200">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <a href="{% url 'about' %}" class="{% if 'about' in request.path %}bg-primary-50 dark:bg-primary-900 border-primary-500 text-primary-700 dark:text-primary-200{% else %}border-transparent text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200{% endif %} block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors duration-200">
+                    <i class="fas fa-info-circle mr-2"></i> About
+                </a>
+                <a href="{% url 'features' %}" class="{% if 'features' in request.path %}bg-primary-50 dark:bg-primary-900 border-primary-500 text-primary-700 dark:text-primary-200{% else %}border-transparent text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200{% endif %} block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors duration-200">
+                    <i class="fas fa-star mr-2"></i> Features
+                </a>
+                <a href="{% url 'detect' %}" class="{% if 'detect' in request.path %}bg-primary-50 dark:bg-primary-900 border-primary-500 text-primary-700 dark:text-primary-200{% else %}border-transparent text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200{% endif %} block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors duration-200">
+                    <i class="fas fa-search mr-2"></i> Detect Disease
+                </a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+                {% if user.is_authenticated %}
+                    <div class="flex items-center px-4">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-user-circle text-2xl text-gray-500 dark:text-gray-300"></i>
+                        </div>
+                        <div class="ml-3">
+                            <div class="text-base font-medium text-gray-900 dark:text-white">{{ user.username }}</div>
+                            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ user.email }}</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 space-y-1">
+                        <a href="{% url 'dashboard' %}" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                        <a href="{% url 'logout' %}" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="mt-3 space-y-1">
+                        <a href="{% url 'login' %}" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-sign-in-alt mr-2"></i> Login
+                        </a>
+                        <a href="{% url 'register' %}" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-user-plus mr-2"></i> Sign Up
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% if messages %}
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+                {% for message in messages %}
+                    <div class="rounded-md p-4 mb-4 {% if message.tags == 'success' %}bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-200{% elif message.tags == 'error' %}bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-200{% elif message.tags == 'warning' %}bg-yellow-50 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200{% else %}bg-blue-50 dark:bg-blue-900 text-blue-800 dark:text-blue-200{% endif %}">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                {% if message.tags == 'success' %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% elif message.tags == 'error' %}
+                                    <i class="fas fa-exclamation-circle"></i>
+                                {% elif message.tags == 'warning' %}
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                {% else %}
+                                    <i class="fas fa-info-circle"></i>
+                                {% endif %}
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium">{{ message }}</p>
+                            </div>
+                            <div class="ml-auto pl-3">
+                                <div class="-mx-1.5 -my-1.5">
+                                    <button type="button" class="inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 {% if message.tags == 'success' %}text-green-500 hover:bg-green-100 focus:ring-green-600 focus:ring-offset-green-50{% elif message.tags == 'error' %}text-red-500 hover:bg-red-100 focus:ring-red-600 focus:ring-offset-red-50{% elif message.tags == 'warning' %}text-yellow-500 hover:bg-yellow-100 focus:ring-yellow-600 focus:ring-offset-yellow-50{% else %}text-blue-500 hover:bg-blue-100 focus:ring-blue-600 focus:ring-offset-blue-50{% endif %}">
+                                        <span class="sr-only">Dismiss</span>
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">LeafSense</h3>
+                    <p class="text-gray-400">Advanced plant disease detection using AI technology.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="{% url 'dashboard' %}" class="text-gray-400 hover:text-white">Dashboard</a></li>
+                        <li><a href="{% url 'detect' %}" class="text-gray-400 hover:text-white">Detect Disease</a></li>
+                        <li><a href="{% url 'detection_history' %}" class="text-gray-400 hover:text-white">History</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact</h3>
+                    <p class="text-gray-400">Email: info@leafsense.in</p>
+                    <p class="text-gray-400">Phone: +91 9787721111</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 LeafSense. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Theme toggle
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark') ? 'enabled' : 'disabled');
+        });
+
+        // Check for saved theme preference
+        if (localStorage.getItem('darkMode') === 'enabled' || 
+            (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Dismiss messages
+        document.querySelectorAll('.rounded-md button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.rounded-md').remove();
+            });
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+    <!-- Chatbot Component -->
+    {% include "components/chatbot_simple.html" with chat_messages=chat_messages %}
+</body>
+</html> 

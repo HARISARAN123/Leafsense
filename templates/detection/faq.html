@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}FAQ - LeafSense{% endblock %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto divide-y-2 divide-gray-200 dark:divide-gray-700">
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+                Frequently Asked Questions
+            </h2>
+            <dl class="mt-6 space-y-6 divide-y divide-gray-200 dark:divide-gray-700">
+                <div class="pt-6">
+                    <dt class="text-lg">
+                        <button class="text-left w-full flex justify-between items-start text-gray-400 dark:text-gray-300" aria-controls="faq-0" aria-expanded="false">
+                            <span class="font-medium text-gray-900 dark:text-white">What is LeafSense?</span>
+                            <span class="ml-6 h-7 flex items-center">
+                                <svg class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </button>
+                    </dt>
+                    <dd class="mt-2 pr-12" id="faq-0">
+                        <p class="text-base text-gray-500 dark:text-gray-400">
+                            LeafSense is an AI-powered plant disease detection system that helps farmers and gardeners identify plant diseases quickly and accurately. Using advanced machine learning algorithms, it analyzes leaf images to provide instant diagnosis and treatment recommendations.
+                        </p>
+                    </dd>
+                </div>
+
+                <div class="pt-6">
+                    <dt class="text-lg">
+                        <button class="text-left w-full flex justify-between items-start text-gray-400 dark:text-gray-300" aria-controls="faq-1" aria-expanded="false">
+                            <span class="font-medium text-gray-900 dark:text-white">How accurate is LeafSense?</span>
+                            <span class="ml-6 h-7 flex items-center">
+                                <svg class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </button>
+                    </dt>
+                    <dd class="mt-2 pr-12" id="faq-1">
+                        <p class="text-base text-gray-500 dark:text-gray-400">
+                            LeafSense achieves over 95% accuracy in disease detection for common plant diseases. The system is continuously learning and improving its accuracy through user feedback and new data.
+                        </p>
+                    </dd>
+                </div>
+
+                <div class="pt-6">
+                    <dt class="text-lg">
+                        <button class="text-left w-full flex justify-between items-start text-gray-400 dark:text-gray-300" aria-controls="faq-2" aria-expanded="false">
+                            <span class="font-medium text-gray-900 dark:text-white">What types of plants does LeafSense support?</span>
+                            <span class="ml-6 h-7 flex items-center">
+                                <svg class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </button>
+                    </dt>
+                    <dd class="mt-2 pr-12" id="faq-2">
+                        <p class="text-base text-gray-500 dark:text-gray-400">
+                            LeafSense currently supports a wide range of agricultural crops including tomatoes, potatoes, rice, wheat, corn, and many more. We're constantly expanding our database to include more plant species.
+                        </p>
+                    </dd>
+                </div>
+
+                <div class="pt-6">
+                    <dt class="text-lg">
+                        <button class="text-left w-full flex justify-between items-start text-gray-400 dark:text-gray-300" aria-controls="faq-3" aria-expanded="false">
+                            <span class="font-medium text-gray-900 dark:text-white">How do I get started with LeafSense?</span>
+                            <span class="ml-6 h-7 flex items-center">
+                                <svg class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </button>
+                    </dt>
+                    <dd class="mt-2 pr-12" id="faq-3">
+                        <p class="text-base text-gray-500 dark:text-gray-400">
+                            Getting started is easy! Simply create an account, upload a clear photo of the affected plant leaf, and our AI will analyze it instantly. You'll receive detailed information about the disease and recommended treatments.
+                        </p>
+                    </dd>
+                </div>
+
+                <div class="pt-6">
+                    <dt class="text-lg">
+                        <button class="text-left w-full flex justify-between items-start text-gray-400 dark:text-gray-300" aria-controls="faq-4" aria-expanded="false">
+                            <span class="font-medium text-gray-900 dark:text-white">Is my data secure with LeafSense?</span>
+                            <span class="ml-6 h-7 flex items-center">
+                                <svg class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </button>
+                    </dt>
+                    <dd class="mt-2 pr-12" id="faq-4">
+                        <p class="text-base text-gray-500 dark:text-gray-400">
+                            Yes, we take data security seriously. All your images and data are encrypted and stored securely. We never share your personal information with third parties without your consent.
+                        </p>
+                    </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('button[aria-controls]').forEach(button => {
+        button.addEventListener('click', () => {
+            const expanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', !expanded);
+            button.querySelector('svg').classList.toggle('rotate-180');
+            const target = document.getElementById(button.getAttribute('aria-controls'));
+            target.classList.toggle('hidden');
+        });
+    });
+</script>
+{% endblock %} 

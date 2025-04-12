@@ -1,0 +1,508 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-[calc(100vh-4rem)] py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Plant Disease Detection</h1>
+            <p class="mt-3 text-lg text-gray-500 dark:text-gray-300">Upload a leaf image to detect plant diseases and get treatment recommendations</p>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="mb-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
+                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                                    Accuracy Rate
+                                </dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                        95%
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
+                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                                    Processing Time
+                                </dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                        < 30s
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-amber-500 rounded-md p-3">
+                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                                    Diseases Detected
+                                </dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                        50+
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-purple-500 rounded-md p-3">
+                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                                    Happy Users
+                                </dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                        1,000+
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Upload Section -->
+            <div class="lg:col-span-2">
+                <div class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+                    <div class="px-4 py-5 sm:p-6">
+                        <form method="post" enctype="multipart/form-data" id="uploadForm" class="space-y-6">
+                            {% csrf_token %}
+                            
+                            <!-- Drag and drop file upload area -->
+                            <div class="mt-1 flex justify-center rounded-lg border border-dashed border-gray-300 dark:border-gray-600 px-6 py-10" id="dropArea">
+                                <div class="text-center">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <div class="mt-4 flex text-sm leading-6 text-gray-600 dark:text-gray-400">
+                                        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white dark:bg-gray-800 font-semibold text-green-600 dark:text-green-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-green-600 focus-within:ring-offset-2 hover:text-green-500 dark:hover:text-green-300">
+                                            <span>Upload a file</span>
+                                            <input id="file-upload" name="image" type="file" class="sr-only" accept="image/*" required>
+                                        </label>
+                                        <p class="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF up to 10MB</p>
+                                    <p id="fileName" class="mt-2 text-sm text-green-600 dark:text-green-400 font-medium hidden"></p>
+                                </div>
+                            </div>
+                            
+                            <!-- Error messages -->
+                            {% if form.errors %}
+                            <div class="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-5 w-5 text-red-400 dark:text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h3 class="text-sm font-medium text-red-800 dark:text-red-200">There were errors with your submission</h3>
+                                        <div class="mt-2 text-sm text-red-700 dark:text-red-300">
+                                            <ul class="list-disc pl-5 space-y-1">
+                                                {% for field, errors in form.errors.items %}
+                                                    {% for error in errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="flex justify-center">
+                                <button type="submit" id="submitBtn" class="rounded-md bg-green-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                                    Analyze Image
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Loading spinner -->
+                        <div id="loadingSpinner" class="hidden mt-8">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 dark:border-green-400"></div>
+                                <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Analyzing your image...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Results section -->
+                        {% if detection %}
+                        <div class="mt-8 space-y-6">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Analysis Results</h2>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">{{ detection.created_at|date:"F j, Y, g:i a" }}</span>
+                            </div>
+                            
+                            <!-- Image preview -->
+                            <div class="mb-6 flex justify-center">
+                                <div class="relative rounded-lg overflow-hidden shadow-lg max-w-md w-full">
+                                    <img src="{{ detection.image.url }}" alt="Uploaded leaf image" class="w-full h-auto object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                                        <p class="text-white text-sm font-medium">Uploaded Image</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                                <!-- Disease Card -->
+                                <div class="bg-white dark:bg-gray-700 overflow-hidden shadow-lg rounded-lg border border-gray-100 dark:border-gray-600 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 bg-green-100 dark:bg-green-900/30 p-2 rounded-full">
+                                                <span class="text-2xl">🌿</span>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Disease</h3>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ detection.disease }}</p>
+                                        </div>
+                                        <div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-600">
+                                            <p class="text-xs text-gray-400 dark:text-gray-500">Identified plant disease based on leaf analysis</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Cure Card -->
+                                <div class="bg-white dark:bg-gray-700 overflow-hidden shadow-lg rounded-lg border border-gray-100 dark:border-gray-600 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 bg-blue-100 dark:bg-blue-900/30 p-2 rounded-full">
+                                                <span class="text-2xl">💊</span>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Cure</h3>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ detection.cure }}</p>
+                                        </div>
+                                        <div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-600">
+                                            <p class="text-xs text-gray-400 dark:text-gray-500">Recommended treatment methods</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Water Card -->
+                                <div class="bg-white dark:bg-gray-700 overflow-hidden shadow-lg rounded-lg border border-gray-100 dark:border-gray-600 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 bg-cyan-100 dark:bg-cyan-900/30 p-2 rounded-full">
+                                                <span class="text-2xl">💧</span>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Water</h3>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ detection.water }}</p>
+                                        </div>
+                                        <div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-600">
+                                            <p class="text-xs text-gray-400 dark:text-gray-500">Optimal watering schedule and requirements</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Fertilizer Card -->
+                                <div class="bg-white dark:bg-gray-700 overflow-hidden shadow-lg rounded-lg border border-gray-100 dark:border-gray-600 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 bg-amber-100 dark:bg-amber-900/30 p-2 rounded-full">
+                                                <span class="text-2xl">🌾</span>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Fertilizer</h3>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ detection.fertilizer }}</p>
+                                        </div>
+                                        <div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-600">
+                                            <p class="text-xs text-gray-400 dark:text-gray-500">Recommended fertilizers and pesticides</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Tips Card -->
+                                <div class="bg-white dark:bg-gray-700 overflow-hidden shadow-lg rounded-lg border border-gray-100 dark:border-gray-600 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 bg-purple-100 dark:bg-purple-900/30 p-2 rounded-full">
+                                                <span class="text-2xl">📋</span>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Tips</h3>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ detection.tips }}</p>
+                                        </div>
+                                        <div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-600">
+                                            <p class="text-xs text-gray-400 dark:text-gray-500">General farming and plant care tips</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Download or share results -->
+                            <div class="mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                                <a href="{% url 'download_report' report_id=detection.id %}" class="inline-flex items-center justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                                    <svg class="mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                    </svg>
+                                    📄 Download Report
+                                </a>
+                                <button type="button" class="inline-flex items-center justify-center rounded-md bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <svg class="mr-2 h-4 w-4 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                                    </svg>
+                                    Share
+                                </button>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1 space-y-8">
+                <!-- Quick Tips Section -->
+                <div class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+                    <div class="px-4 py-5 sm:p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Quick Tips</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                    <svg class="h-4 w-4 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-500 dark:text-gray-400">Take photos in good lighting for best results</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                    <svg class="h-4 w-4 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-500 dark:text-gray-400">Include multiple angles of affected leaves</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                    <svg class="h-4 w-4 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-500 dark:text-gray-400">Focus on the most affected areas</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                    <svg class="h-4 w-4 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-500 dark:text-gray-400">Use high-resolution images when possible</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Featured Diseases Section -->
+                <div class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+                    <div class="px-4 py-5 sm:p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Common Plant Diseases</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                                    <span class="text-red-600 dark:text-red-400 text-lg">🍅</span>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-gray-900 dark:text-white">Late Blight</h4>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Common in tomatoes and potatoes, causing dark spots and rot</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                                    <span class="text-amber-600 dark:text-amber-400 text-lg">🍎</span>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-gray-900 dark:text-white">Apple Scab</h4>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Fungal disease causing brown spots on leaves and fruit</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                    <span class="text-green-600 dark:text-green-400 text-lg">🌿</span>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-gray-900 dark:text-white">Powdery Mildew</h4>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">White powdery spots on leaves, affecting many plant species</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Detections Section -->
+                <div class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+                    <div class="px-4 py-5 sm:p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Recent Detections</h3>
+                        <div class="space-y-4">
+                            {% for recent in recent_detections|slice:":3" %}
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                                    <img src="{{ recent.image.url }}" alt="Recent detection" class="h-full w-full object-cover">
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-gray-900 dark:text-white">{{ recent.disease|truncatechars:20 }}</h4>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ recent.created_at|date:"M d, Y" }}</p>
+                                </div>
+                                <a href="{% url 'detection_detail' detection_id=recent.id %}" class="ml-auto text-xs text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">View</a>
+                            </div>
+                            {% empty %}
+                            <p class="text-sm text-gray-500 dark:text-gray-400">No recent detections</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // File upload handling
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('file-upload');
+    const fileName = document.getElementById('fileName');
+    const form = document.getElementById('uploadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    // Highlight drop zone when item is dragged over it
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    // Handle dropped files
+    dropArea.addEventListener('drop', handleDrop, false);
+    
+    // Handle file input change
+    fileInput.addEventListener('change', handleFiles, false);
+    
+    // Handle form submission
+    form.addEventListener('submit', function(e) {
+        if (fileInput.files.length > 0) {
+            submitBtn.disabled = true;
+            loadingSpinner.classList.remove('hidden');
+        }
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    function highlight(e) {
+        dropArea.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900/10');
+    }
+    
+    function unhighlight(e) {
+        dropArea.classList.remove('border-green-500', 'bg-green-50', 'dark:bg-green-900/10');
+    }
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        
+        handleFiles({ target: { files: files } });
+    }
+    
+    function handleFiles(e) {
+        const files = e.target.files;
+        
+        if (files.length > 0) {
+            const file = files[0];
+            
+            // Check if file is an image
+            if (!file.type.match('image.*')) {
+                alert('Please upload an image file');
+                fileInput.value = '';
+                fileName.classList.add('hidden');
+                return;
+            }
+            
+            // Check file size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size exceeds 10MB limit');
+                fileInput.value = '';
+                fileName.classList.add('hidden');
+                return;
+            }
+            
+            fileName.textContent = file.name;
+            fileName.classList.remove('hidden');
+        } else {
+            fileName.classList.add('hidden');
+        }
+    }
+</script>
+{% endblock %} 

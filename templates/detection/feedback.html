@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                Feedback
+            </h2>
+            <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-gray-300">
+                Help us improve LeafSense by sharing your thoughts and suggestions.
+            </p>
+        </div>
+
+        <form method="post" class="mt-10">
+            {% csrf_token %}
+            <div class="space-y-12">
+                <div class="border-b border-gray-900/10 dark:border-gray-100/10 pb-12">
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div class="sm:col-span-3">
+                            <label for="id_name" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                                Name
+                            </label>
+                            <div class="mt-2">
+                                {{ form.name }}
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <label for="id_email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                                Email
+                            </label>
+                            <div class="mt-2">
+                                {{ form.email }}
+                            </div>
+                        </div>
+
+                        <div class="col-span-full">
+                            <label for="id_message" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                                Message
+                            </label>
+                            <div class="mt-2">
+                                {{ form.message }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <button type="submit" class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                    Submit Feedback
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %} 
